@@ -11,8 +11,13 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven("https://api.xposed.info/")
     }
 }
 
 rootProject.name = "μ"
 include(":app")
+include(
+    ":easyhook:api",
+    ":easyhook:ksp-xposed",
+)

@@ -12,6 +12,8 @@ val androidSourceCompatibility by extra(JavaVersion.VERSION_11)
 val androidTargetCompatibility by extra(JavaVersion.VERSION_11)
 val kotlinJvmTarget by extra("11")
 
+val applicationModuleName by extra(":app")
+
 tasks.register("clean", Delete::class) {
     delete(rootProject.buildDir)
 }
