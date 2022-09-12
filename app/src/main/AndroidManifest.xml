@@ -29,7 +29,5 @@
             </intent-filter>
 
         </activity>
-
-        <service android:name=".HandlerService" android:exported="false"/>
     </application>
 </manifest>

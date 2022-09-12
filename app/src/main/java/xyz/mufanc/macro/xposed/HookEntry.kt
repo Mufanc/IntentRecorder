@@ -38,7 +38,7 @@ class HookEntry : HookHelper(App.TAG) {
                         }
                         Logger.i("@Hooker: service disconnected!")
                     }, 0)
-                    Logger.i("@Hooker: received service!")
+                    Logger.i("@Hooker: service connected!")
                 }
 
                 findClass("com.android.server.wm.ActivityStarter").hook {

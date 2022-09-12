@@ -20,20 +20,4 @@ class App : Application() {
             Logger.configure(TAG = TAG)
         }
     }
-
-    override fun onCreate() {
-        super.onCreate()
-
-        bindService(
-            Intent(this, HandlerService::class.java),
-            object : ServiceConnection {
-                override fun onServiceDisconnected(ignored: ComponentName) = Unit
-                override fun onServiceConnected(ignored: ComponentName, service: IBinder) {
-                    Logger.i("@Module: service connected")
-                    ServiceChannel.init(this@App, service)
-                }
-            },
-            Context.BIND_AUTO_CREATE
-        )
-    }
 }
