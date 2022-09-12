@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">缪</string>
+    <string name="module_desc">Intent 记录</string>
 </resources>
