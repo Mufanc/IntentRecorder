@@ -14,15 +14,13 @@ class MainActivity : AppCompatActivity() {
 
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
 
-    private val adapter by lazy { IntentListAdapter() }
+    private val adapter by lazy { IntentListAdapter(packageManager) }
 
     private val service = object : IHandlerService.Stub() {
         override fun onNewIntent(bundle: Bundle) {
             val request = RequestPack(bundle)
-            Logger.i(request.callingPackage)
-            Logger.i(request.intent.toUri(0))
             runOnUiThread {
-                adapter.insert(request.intent.toString())
+                adapter.insert(request.intent)
             }
         }
     }
@@ -33,11 +31,12 @@ class MainActivity : AppCompatActivity() {
             setContentView(root)
 
             intentList.layoutManager = LinearLayoutManager(
-                this@MainActivity, LinearLayoutManager.VERTICAL, false
-            )
+                this@MainActivity, LinearLayoutManager.VERTICAL, true
+            ).apply { stackFromEnd = true }
             intentList.adapter = adapter
         }
 
+        adapter.insert(intent)
         ServiceChannel.init(applicationContext, service)
     }
 }

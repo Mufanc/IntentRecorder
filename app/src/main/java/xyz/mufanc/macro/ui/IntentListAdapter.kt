@@ -1,17 +1,23 @@
 package xyz.mufanc.macro.ui
 
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import xyz.mufanc.macro.databinding.ItemIntentListBinding
 
-class IntentListAdapter : RecyclerView.Adapter<IntentListAdapter.ViewHolder>() {
+class IntentListAdapter(
+    private val packageManager: PackageManager
+) : RecyclerView.Adapter<IntentListAdapter.ViewHolder>() {
 
-    private val intentList = mutableListOf<String>()
+    private val intentList = mutableListOf<Intent>()
 
     class ViewHolder(binding: ItemIntentListBinding) : RecyclerView.ViewHolder(binding.root) {
-        val uri: TextView = binding.uri
+        val icon: ImageView = binding.icon
+        val simpleName: TextView = binding.simpleName
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -21,13 +27,15 @@ class IntentListAdapter : RecyclerView.Adapter<IntentListAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.uri.text = intentList[position]
+        val intent = intentList[position]
+        holder.icon.setImageDrawable(packageManager.getActivityIcon(intent))
+        holder.simpleName.text = intent.component!!.className.substringAfterLast('.')
     }
 
     override fun getItemCount(): Int = intentList.size
 
-    fun insert(intent: String) {
+    fun insert(intent: Intent) {
         intentList.add(intent)
-        notifyDataSetChanged()
+        notifyItemInserted(intentList.lastIndex)
     }
 }

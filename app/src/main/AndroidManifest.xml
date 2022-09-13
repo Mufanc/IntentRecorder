@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="xyz.mufanc.macro">
 
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"
+        tools:ignore="QueryAllPackagesPermission" />
+
     <application android:name=".App"
         android:allowBackup="false"
         android:dataExtractionRules="@xml/data_extraction_rules"
