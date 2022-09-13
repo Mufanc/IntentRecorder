@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity() {
             val request = RequestPack(bundle)
             runOnUiThread {
                 adapter.insert(request.intent)
+                binding.intentList.scrollToPosition(adapter.itemCount - 1)
             }
         }
     }
